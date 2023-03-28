@@ -1,16 +1,15 @@
-# login_screen
+# Sample Login Form
 
-A new Flutter project.
+A sample form made with Dart/Flutter.
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+This project was made trying to improve my skills in flutter. 
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Responsive UI
+- Form Validation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/104390047/228252165-3923d910-4f0f-4cc8-ae86-cb6618ade353.gif)
+
