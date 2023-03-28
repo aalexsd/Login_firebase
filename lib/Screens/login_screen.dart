@@ -8,9 +8,12 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
      body: Stack(
        children: [
-         ClipRRect(
-           child: Image.asset('assets/images/newera.jpeg',
-             fit: BoxFit.fill,),
+         SizedBox(
+           height: 350,
+           child: ClipRRect(
+             child: Image.asset('assets/images/flutterr.jpeg',
+               fit: BoxFit.cover,),
+           ),
          ),
          Padding(
            padding: const EdgeInsets.only(top: 250,
@@ -97,7 +100,40 @@ class LoginScreen extends StatelessWidget {
                      style: TextStyle(
                        color: Colors.grey
                      ),),
-                   )
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.only(top: 90),
+                     child: SizedBox(
+                       width: 280 ,
+                       height: 40,
+                       child: ElevatedButton(onPressed: (){},
+                         style: ButtonStyle(
+                           backgroundColor: MaterialStateProperty.all(Colors.blue),
+                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                               RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.circular(30.0),
+                                   side: const BorderSide(color: Colors.blue)
+                               )
+                           ),
+                         ),
+                         child: Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children: [
+                             IconButton(
+                             icon: Image.asset('assets/images/google.webp'),
+                             iconSize: 50,
+                             onPressed: () {},
+                           ),
+                             const Text('Continue with Google',
+                               style: TextStyle(
+                                   fontSize: 17
+                               ),
+                             ),
+                           ],
+                         )
+                       ),
+                     ),
+                   ),
                  ],
                ),
              )
