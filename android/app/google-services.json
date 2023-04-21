@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "876170836068",
+    "project_id": "flutter-login-capyba",
+    "storage_bucket": "flutter-login-capyba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876170836068:android:aa4a6737183b2d5419c771",
+        "android_client_info": {
+          "package_name": "com.example.login_screen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876170836068-nm8jk7rro9p2a53cl0j1kphsj44r39n0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcEPWYlgpCcg3a6XeUR6-kflfGUW-w2uU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876170836068-nm8jk7rro9p2a53cl0j1kphsj44r39n0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
