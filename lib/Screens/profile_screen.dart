@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'edit_profile_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
-  final orderIcons = [
-    FontAwesomeIcons.creditCard,
-    FontAwesomeIcons.boxesPacking,
-    FontAwesomeIcons.truck,
-    FontAwesomeIcons.message,
-    FontAwesomeIcons.tentArrowTurnLeft
-  ];
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  late String displayName =
+      FirebaseAuth.instance.currentUser?.displayName ?? '';
+
+  void updateDisplayName(String newName) {
+    setState(() {
+      displayName = newName;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +27,6 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xFFEEEFF5),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: CircleAvatar(
-              radius: 20,
-              backgroundImage: AssetImage('assets/images/avatar.png'),
-            ),
-          ),
-        ],
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
@@ -37,13 +34,63 @@ class ProfileScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             SizedBox(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Text(
-                  'Olá, ${user.email}',
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, top: 20),
+              child: Text(
+                'Olá, $displayName',
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 20.0, top: 20),
+              child: Text(
+                'Informações Pessoais',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, bottom: 10),
+              color: Colors.white,
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.person_outline),
+                    title: const Text('Nome completo'),
+                    trailing: Text(user.displayName ?? ''),
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => EditProfileScreen(
+                                updateDisplayName: updateDisplayName,
+                              )));
+                    },
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.email_outlined),
+                    title: const Text('E-mail'),
+                    trailing: Text(user.email!),
+                  ),
+                  const Divider(height: 1),
+                ],
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => EditProfileScreen(
+                            updateDisplayName: updateDisplayName,
+                          )));
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.black87),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                          side: const BorderSide(color: Colors.black87))),
                 ),
+                child: const Text('Editar Perfil'),
               ),
             ),
           ],

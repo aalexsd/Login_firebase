@@ -113,7 +113,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       Utils.showSnackBar('Email de redefinição de Senha foi enviado.');
       Navigator.of(context).popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e) {
-      print(e);
       Utils.showSnackBar(e.message);
       Navigator.of(context).pop();
     }

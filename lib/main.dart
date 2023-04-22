@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login_screen/Screens/home_screen.dart';
 import 'package:login_screen/Screens/auth_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:login_screen/Screens/home_screen2.dart';
@@ -27,14 +26,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
-          elevation: 0,
-          backgroundColor: Color(0xFFEEEFF5),
-          titleTextStyle: TextStyle(color: Colors.black,
-          fontSize: 18,
-          fontWeight: FontWeight.w500),
-          actionsIconTheme: IconThemeData(color: Colors.black),
-          iconTheme: IconThemeData(color: Colors.black)
-        ),
+            elevation: 0,
+            backgroundColor: Color(0xFFEEEFF5),
+            titleTextStyle: TextStyle(
+                color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
+            actionsIconTheme: IconThemeData(color: Colors.black),
+            iconTheme: IconThemeData(color: Colors.black)),
       ),
       home: const MainPage(),
     );

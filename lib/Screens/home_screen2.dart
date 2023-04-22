@@ -14,10 +14,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
   int currentIndex = 0;
   final pageController = PageController(initialPage: 0);
 
-  final tabBarICons = [
-    FontAwesomeIcons.house,
-    FontAwesomeIcons.user
-  ];
+  final tabBarICons = [FontAwesomeIcons.house, FontAwesomeIcons.user];
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +31,12 @@ class _HomeScreen2State extends State<HomeScreen2> {
                     currentIndex = index;
                   });
                 },
-                children: [
-                  const HomeDisplayScreen(),
+                children: const [
+                  HomeDisplayScreen(),
                   ProfileScreen(),
                 ],
               ),
-              // bottom bar
+              // Aqui criei uma bottom bar personalizada, para poder navegar entre a tela inicial e de perfil
               Positioned(
                 bottom: 20,
                 left: 20,

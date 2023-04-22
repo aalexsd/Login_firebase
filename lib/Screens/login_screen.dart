@@ -2,7 +2,10 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:login_screen/Screens/forgot_password.dart';
+import 'package:login_screen/Screens/home_screen2.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 import '../Utils/utils.dart';
 import '../main.dart';
 
@@ -48,9 +51,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const SizedBox(height: 100.0),
                       const Padding(
-                        padding: EdgeInsets.only(left: 20.0,
-                        right: 20,
-                        bottom: 30),
+                        padding:
+                            EdgeInsets.only(left: 20.0, right: 20, bottom: 30),
                         child: Text(
                           'Seja Bem-Vindo',
                           style: TextStyle(
@@ -71,8 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: emailController,
                           decoration: const InputDecoration(
                               enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.2, color: Colors.black87),
+                                borderSide: BorderSide(
+                                    width: 0.2, color: Colors.black87),
                               ),
                               prefixIcon: Icon(Icons.mail),
                               hintText: 'Digite seu Email',
@@ -86,8 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: passwordController,
                           decoration: const InputDecoration(
                               enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.2, color: Colors.black87),
+                                borderSide: BorderSide(
+                                    width: 0.2, color: Colors.black87),
                               ),
                               prefixIcon: Icon(Icons.lock),
                               hintText: 'Digite sua Senha',
@@ -98,21 +100,40 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 40),
+                        padding: const EdgeInsets.only(top: 15.0),
+                        child: GestureDetector(
+                          child: const Text(
+                            'Esqueceu sua senha?',
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.blueAccent,
+                                fontSize: 15),
+                          ),
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ForgotPasswordScreen(),
+                            ));
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30),
                         child: SizedBox(
                           width: 200,
-                          height: 50,
+                          height: 40,
                           child: ElevatedButton(
                             onPressed: () {
                               signIn();
                             },
                             style: ButtonStyle(
                               backgroundColor:
-                              MaterialStateProperty.all(Colors.black87),
-                              shape: MaterialStateProperty
-                                  .all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0),
-                                  side: const BorderSide(color: Colors.black87))),
+                                  MaterialStateProperty.all(Colors.black87),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      side: const BorderSide(
+                                          color: Colors.black87))),
                             ),
                             child: const Text(
                               'Entrar',
@@ -122,19 +143,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        child: GestureDetector(
-                          child: const Text('Esqueceu sua senha?',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                              color: Colors.blueAccent,
-                            fontSize: 18
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: Row(children: const <Widget>[
+                          Expanded(
+                              child: Divider(
+                            thickness: 2,
+                            indent: 50,
+                            endIndent: 10,
+                          )),
+                          Text("ou"),
+                          Expanded(
+                              child: Divider(
+                            thickness: 2,
+                            indent: 10,
+                            endIndent: 50,
+                          )),
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: SignInButton(
+                          Buttons.google,
+                          text: 'Entre com o Google',
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
                           ),
-                          ),
-                          onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => ForgotPasswordScreen(), )
-                            );
+                          onPressed: () {
+                            SignInWithGoogle();
                           },
                         ),
                       ),
@@ -176,10 +211,24 @@ class _LoginScreenState extends State<LoginScreen> {
           email: emailController.text.trim(),
           password: passwordController.text.trim());
     } on FirebaseAuthException catch (e) {
-      print(e);
-
       Utils.showSnackBar(e.message);
     }
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  }
+
+  Future SignInWithGoogle() async {
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    if (userCredential.user != null) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const HomeScreen2()));
+    }
   }
 }
