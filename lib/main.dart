@@ -14,7 +14,16 @@ Future main() async {
 final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
+
+  static const appBarTheme = AppBarTheme(
+    elevation: 0,
+    backgroundColor: Color(0xFFEEEFF5),
+    titleTextStyle: TextStyle(
+        color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
+    actionsIconTheme: IconThemeData(color: Colors.black),
+    iconTheme: IconThemeData(color: Colors.black),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +34,7 @@ class MyApp extends StatelessWidget {
       title: 'Capyba Test',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        appBarTheme: const AppBarTheme(
-            elevation: 0,
-            backgroundColor: Color(0xFFEEEFF5),
-            titleTextStyle: TextStyle(
-                color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
-            actionsIconTheme: IconThemeData(color: Colors.black),
-            iconTheme: IconThemeData(color: Colors.black)),
+        appBarTheme: appBarTheme,
       ),
       home: const MainPage(),
     );
@@ -39,26 +42,29 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+  const MainPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (snapshot.hasError) {
-              return const Center(
-                child: Text('Algo deu errado'),
-              );
-            } else if (snapshot.hasData) {
-              return const HomeScreen2();
-            }
-            return const AuthScreen();
-          },
-        ),
-      );
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder<User?>(
+        stream:
+            FirebaseAuth.instance?.authStateChanges() ?? const Stream.empty(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text('Algo deu errado'),
+            );
+          } else if (snapshot.hasData) {
+            return const HomeScreen2();
+          }
+          return const AuthScreen();
+        },
+      ),
+    );
+  }
 }

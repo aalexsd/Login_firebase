@@ -113,9 +113,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const Padding(
                     padding: EdgeInsets.only(left: 10.0),
                     child: Text(
-                      'Adicione uma foto para completar seu perfil',
-                      style: TextStyle(fontSize: 15,
-                      fontWeight: FontWeight.bold),
+                      'Adicione uma selfie para completar seu perfil',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                   ),
                   ElevatedButton(
@@ -147,9 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: 250,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {
-                      signUp();
-                    },
+                    onPressed: isLoading ? null : signUp,
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(Colors.black87),
@@ -158,8 +156,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               borderRadius: BorderRadius.circular(30.0),
                               side: const BorderSide(color: Colors.black87))),
                     ),
-                    child: const Text(
-                      'Criar Conta',
+                    child: Text(
+                      isLoading ? 'Aguarde...' : 'Criar Conta',
                       style: TextStyle(fontSize: 17),
                     ),
                   ),
@@ -188,6 +186,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+
   // sign up method
   Future<void> signUp() async {
     setState(() {
@@ -213,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     // check the email and password
     try {
       final authResult =
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
@@ -242,5 +241,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Navigator.of(context).popUntil((route) => route.isFirst);
     }
   }
-
 }

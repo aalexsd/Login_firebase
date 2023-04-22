@@ -96,6 +96,7 @@ class _HomeDisplayScreenState extends State<HomeDisplayScreen>
             GestureDetector(
               onTap: () {
                 signOutGoogle().then((value) => Navigator.pop(context));
+                FirebaseAuth.instance.signOut();
               },
               child: ListTile(
                 title: Row(
@@ -251,9 +252,12 @@ class _HomeDisplayScreenState extends State<HomeDisplayScreen>
     );
   }
 
-  Future signOutGoogle() async {
+  Future<void> signOutGoogle() async {
     await GoogleSignIn().signOut();
-    await _auth.signOut();
+    await FirebaseAuth.instance.signOut();
     Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Logout realizado com sucesso')),
+    );
   }
 }

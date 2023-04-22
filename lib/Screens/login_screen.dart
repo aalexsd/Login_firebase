@@ -20,16 +20,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-
-    super.dispose();
-  }
+  late final emailController = TextEditingController();
+  late final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -169,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(50),
                           ),
                           onPressed: () {
-                            SignInWithGoogle();
+                            signInWithGoogle();
                           },
                         ),
                       ),
@@ -216,19 +208,28 @@ class _LoginScreenState extends State<LoginScreen> {
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
-  Future SignInWithGoogle() async {
-    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
 
-    AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
 
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-    if (userCredential.user != null) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const HomeScreen2()));
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      if (userCredential.user != null) {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const HomeScreen2()),
+        );
+      }
+    } catch (e) {
+      Utils.showSnackBar('Error signing in with Google');
     }
   }
 }

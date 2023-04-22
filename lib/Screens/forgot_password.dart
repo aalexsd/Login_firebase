@@ -4,13 +4,16 @@ import 'package:email_validator/email_validator.dart';
 import 'package:login_screen/Utils/utils.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
+
   @override
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
+  late final formKey = GlobalKey<FormState>();
+  late final emailController = TextEditingController();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -75,7 +78,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     width: 250,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () => resetPassword(),
+                      onPressed: isLoading ? null : resetPassword,
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.black87),
@@ -84,9 +87,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 borderRadius: BorderRadius.circular(30.0),
                                 side: const BorderSide(color: Colors.black87))),
                       ),
-                      child: const Text(
-                        'Redefinir Senha',
-                        style: TextStyle(fontSize: 20),
+                      child: Text(
+                        isLoading ? 'Aguarde...' : 'Redefinir Senha',
+                        style: const TextStyle(fontSize: 20),
                       ),
                     ),
                   ),
