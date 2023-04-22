@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       scaffoldMessengerKey: Utils.messengerKey,
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      title: 'Capyba Test',
+      title: 'Alex App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: appBarTheme,

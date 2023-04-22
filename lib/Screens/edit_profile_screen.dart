@@ -3,8 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final Function(String) updateDisplayName;
+  final String displayName;
 
-  const EditProfileScreen({Key? key, required this.updateDisplayName})
+  const EditProfileScreen({Key? key,
+    required this.updateDisplayName,
+    required this.displayName})
       : super(key: key);
 
   @override
@@ -17,10 +20,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late TextEditingController passwordController;
   late String displayName;
   late String email;
+  late TextEditingController _displayNameController;
 
   @override
   void initState() {
     super.initState();
+    _displayNameController = TextEditingController(text: widget.displayName);
     final currentUser = FirebaseAuth.instance.currentUser!;
     displayName = currentUser.displayName ?? '';
     nameController = TextEditingController(text: displayName);

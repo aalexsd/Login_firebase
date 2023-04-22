@@ -22,6 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
+    displayName = user.displayName ?? '';
     return Scaffold(
       backgroundColor: const Color(0xFFEEEFF5),
       appBar: AppBar(
@@ -60,8 +61,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     trailing: Text(user.displayName ?? ''),
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => EditProfileScreen(
+                          builder: (context) => EditProfileScreen(
                                 updateDisplayName: updateDisplayName,
+                                displayName: displayName,
                               )));
                     },
                   ),
@@ -79,9 +81,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => EditProfileScreen(
-                            updateDisplayName: updateDisplayName,
-                          )));
+                      builder: (context) => EditProfileScreen(
+                          updateDisplayName: updateDisplayName,
+                          displayName: displayName)));
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.black87),
