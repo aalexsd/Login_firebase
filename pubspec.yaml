@@ -1,4 +1,4 @@
-name: login_screen
+name: CapybaApp
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -34,8 +34,6 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  mask_text_input_formatter: ^2.4.0
   font_awesome_flutter: ^10.4.0
   firebase_core: ^2.10.0
   firebase_auth: ^4.4.2
@@ -46,11 +44,20 @@ dependencies:
   cached_network_image: ^3.2.3
   google_sign_in: ^6.1.0
   sign_in_button: ^3.2.0
+  flutter_staggered_grid_view: ^0.6.2
+
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/capyba.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -76,7 +83,6 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - assets/images/avatar.png
     - assets/images/capyba.png
 
 

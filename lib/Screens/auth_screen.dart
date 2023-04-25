@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_screen/Screens/login_screen.dart';
-import 'package:login_screen/Screens/signn_up.dart';
+import 'package:CapybaApp/Screens/login_screen.dart';
+import 'package:CapybaApp/Screens/signn_up.dart';
 
 
 class AuthScreen extends StatefulWidget {
@@ -10,6 +10,7 @@ class AuthScreen extends StatefulWidget {
   State<AuthScreen> createState() => _AuthScreenState();
 }
 
+//this code sets up a screen that displays either a login or sign-up screen depending on the value of isLogin, and allows the user to switch between the two screens by calling the toggle method
 class _AuthScreenState extends State<AuthScreen> {
   bool isLogin = true;
   @override

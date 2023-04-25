@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:login_screen/Utils/utils.dart';
+import 'package:CapybaApp/Utils/utils.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -102,6 +102,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
   }
 
+  //sends a password reset email to the user's email address, displays a snackbar if the email is successfully sent, shows an error message if the email fails to send, and removes any intermediate screens from the navigator stack.
   Future resetPassword() async {
     showDialog(
         context: context,

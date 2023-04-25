@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:login_screen/Screens/restrict_display_screen.dart';
-import 'package:login_screen/Screens/verify_email_screen.dart';
-import 'package:login_screen/collection/restricted.dart';
+import 'package:CapybaApp/Screens/verify_email_screen.dart';
+import 'package:CapybaApp/widgets/home_display_list_view.dart';
+
+import '../widgets/restricted_display_list_view.dart';
 
 class HomeDisplayScreen extends StatefulWidget {
   const HomeDisplayScreen({Key? key}) : super(key: key);
@@ -64,6 +65,7 @@ class _HomeDisplayScreenState extends State<HomeDisplayScreen>
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
+      //creates a side screen
       drawer: Drawer(
         backgroundColor: const Color(0xFFEEEFF5),
         child: ListView(
@@ -182,67 +184,67 @@ class _HomeDisplayScreenState extends State<HomeDisplayScreen>
               children: [
                 // Home tab content
                 selectedValue == 0
-                    // calling AboutUs screen
-                    ? const AboutUs()
+                // calling AboutUs screen
+                    ? const HomeDisplayWidget()
                     : const SizedBox.shrink(),
 
                 // Restricted tab content
                 selectedValue == 1
                     ? FutureBuilder<bool>(
-                        future: isEmailVerified(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<bool> snapshot) {
-                          if (snapshot.hasData && snapshot.data!) {
-                            return const RestrictDisplayScreen();
-                          } else {
-                            return Column(
-                              children: [
-                                const SizedBox(
-                                  height: 80,
-                                ),
-                                const Icon(Icons.email, size: 40),
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 20.0),
-                                  child: Text(
-                                      'Para ter acesso a esse conteúdo, por favor verifique seu Email.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 22)),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10.0),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      sendVerificationEmail();
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content: Text(
-                                            'Email de verificação enviado',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Colors.black87),
-                                      shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30.0),
-                                              side: const BorderSide(
-                                                  color: Colors.black87))),
+                  future: isEmailVerified(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<bool> snapshot) {
+                    if (snapshot.hasData && snapshot.data!) {
+                      return const RestrictedDisplayWidget();
+                    } else {
+                      return Column(
+                        children: [
+                          const SizedBox(
+                            height: 80,
+                          ),
+                          const Icon(Icons.email, size: 40),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 20.0),
+                            child: Text(
+                                'Para ter acesso a esse conteúdo, por favor verifique seu Email.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 22)),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                sendVerificationEmail();
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Email de verificação enviado',
                                     ),
-                                    child: const Text(
-                                        'Enviar Email de verificação'),
                                   ),
-                                ),
-                              ],
-                            );
-                          }
-                        },
-                      )
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                MaterialStateProperty.all(
+                                    Colors.black87),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(30.0),
+                                        side: const BorderSide(
+                                            color: Colors.black87))),
+                              ),
+                              child: const Text(
+                                  'Enviar Email de verificação'),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  },
+                )
                     : const SizedBox.shrink(),
               ],
             ),
@@ -252,6 +254,7 @@ class _HomeDisplayScreenState extends State<HomeDisplayScreen>
     );
   }
 
+  //method to signout of a google account
   Future<void> signOutGoogle() async {
     await GoogleSignIn().signOut();
     await FirebaseAuth.instance.signOut();

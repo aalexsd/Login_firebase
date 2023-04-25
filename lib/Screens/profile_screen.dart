@@ -40,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Text(
                 'Olá, $displayName',
                 style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             const Padding(
@@ -62,9 +62,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => EditProfileScreen(
-                                updateDisplayName: updateDisplayName,
-                                displayName: displayName,
-                              )));
+                            updateDisplayName: updateDisplayName,
+                            displayName: displayName,
+                          )));
                     },
                   ),
                   const Divider(height: 1),

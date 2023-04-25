@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:login_screen/Screens/home_display_screen.dart';
-import 'package:login_screen/Screens/profile_screen.dart';
+import 'package:CapybaApp/Screens/home_display_screen.dart';
+import 'package:CapybaApp/Screens/profile_screen.dart';
 
 class HomeScreen2 extends StatefulWidget {
   const HomeScreen2({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
                   ProfileScreen(),
                 ],
               ),
-              // Aqui criei uma bottom bar personalizada, para poder navegar entre a tela inicial e de perfil
+              // creates a personalized bottom bar
               Positioned(
                 bottom: 20,
                 left: 20,

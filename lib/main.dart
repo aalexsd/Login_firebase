@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login_screen/Screens/auth_screen.dart';
+import 'package:CapybaApp/Screens/auth_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:login_screen/Screens/home_screen2.dart';
+import 'package:CapybaApp/Screens/home_screen2.dart';
 import 'Utils/utils.dart';
 
 Future main() async {
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       scaffoldMessengerKey: Utils.messengerKey,
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      title: 'Alex App',
+      title: 'Capyba App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: appBarTheme,
@@ -47,9 +47,10 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //method sets up a stream that listens to changes in the user authentication state and displays the appropriate screen depending on the current state of the stream.
       body: StreamBuilder<User?>(
         stream:
-            FirebaseAuth.instance?.authStateChanges() ?? const Stream.empty(),
+            FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

@@ -42,7 +42,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         backgroundColor: const Color(0xFFEEEFF5),
         iconTheme: const IconThemeData(color: Colors.black),
         title:
-            const Text('Editar Perfil', style: TextStyle(color: Colors.black)),
+        const Text('Editar Perfil', style: TextStyle(color: Colors.black)),
         actions: [
           TextButton(
             onPressed: () async {
