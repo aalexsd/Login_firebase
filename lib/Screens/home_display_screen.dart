@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:CapybaApp/Screens/verify_email_screen.dart';
 import 'package:CapybaApp/widgets/home_display_list_view.dart';
-
 import '../widgets/restricted_display_list_view.dart';
 
 class HomeDisplayScreen extends StatefulWidget {
@@ -40,11 +39,11 @@ class _HomeDisplayScreenState extends State<HomeDisplayScreen>
     tabController = TabController(length: 2, vsync: this, initialIndex: 0);
   }
 
-  @override
-  void dispose() {
-    tabController.dispose();
-    super.dispose();
-  }
+@override
+void dispose() {
+  tabController.dispose();
+  super.dispose();
+}
 
   @override
   Widget build(BuildContext context) {
@@ -89,10 +88,8 @@ class _HomeDisplayScreenState extends State<HomeDisplayScreen>
                 ],
               ),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const VerifyEmailScreen()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const VerifyEmailScreen()));
+
               },
             ),
             GestureDetector(

@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'Seja Bem-Vindo',
                           style: TextStyle(
-                            fontSize: 45.0,
+                            fontSize: 40.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -184,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ]),
                           )),
                       SizedBox(
-                        height: 30,
+                        height: 50,
                       )
                     ],
                   ),

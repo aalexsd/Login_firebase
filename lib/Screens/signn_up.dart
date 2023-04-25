@@ -108,39 +108,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   autocorrect: false,
                 ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 15.0),
-                    child: Text(
-                      'Adicione uma selfie para completar seu perfil',
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              SizedBox(
+                width: 400,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 15.0),
+                      child: Text(
+                        'Adicione uma selfie para completar seu perfil',
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final pickedFile = await ImagePicker().pickImage(
-                        source: ImageSource.camera, // or ImageSource.gallery,
-                        maxWidth: 500,
-                      );
-                      if (pickedFile != null) {
-                        setState(() {
-                          _userImageFile = File(pickedFile.path);
-                        });
-                      }
-                    },
-                    style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStateProperty.all(Colors.black87),
-                      shape: MaterialStateProperty.all<CircleBorder>(
-                          const CircleBorder(
-                              side: BorderSide(color: Colors.black87))),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final pickedFile = await ImagePicker().pickImage(
+                          source: ImageSource.camera, // or ImageSource.gallery,
+                          maxWidth: 500,
+                        );
+                        if (pickedFile != null) {
+                          setState(() {
+                            _userImageFile = File(pickedFile.path);
+                          });
+                        }
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                        MaterialStateProperty.all(Colors.black87),
+                        shape: MaterialStateProperty.all<CircleBorder>(
+                            const CircleBorder(
+                                side: BorderSide(color: Colors.black87))),
+                      ),
+                      child: const Icon(Icons.camera_alt),
                     ),
-                    child: const Icon(Icons.camera_alt),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 30),

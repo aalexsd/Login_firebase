@@ -56,8 +56,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 children: [
                   ListTile(
-                    leading: const Icon(Icons.person_outline),
-                    title: const Text('Nome completo'),
+                    title: const Text('Nome completo:',
+                      style: TextStyle(
+                        fontSize: 15
+                      )),
                     trailing: Text(user.displayName ?? ''),
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -69,8 +71,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const Divider(height: 1),
                   ListTile(
-                    leading: const Icon(Icons.email_outlined),
-                    title: const Text('E-mail'),
+                    title: const Text('E-mail:',
+                    style: TextStyle(
+                      fontSize: 15
+                    ),),
                     trailing: Text(user.email!),
                   ),
                   const Divider(height: 1),

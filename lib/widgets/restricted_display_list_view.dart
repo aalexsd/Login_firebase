@@ -28,7 +28,7 @@ class _RestrictedDisplayWidgetState extends State<RestrictedDisplayWidget> {
               ),
               SizedBox(width: 8),
               Text(
-                'Parabéns, você desbloqueou as \nelhores ofertas',
+                'Parabéns, você desbloqueou as \nmelhores ofertas',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
