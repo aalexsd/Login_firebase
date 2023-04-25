@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 100.0),
                       const Padding(
                         padding:
-                        EdgeInsets.only(left: 20.0, right: 20, bottom: 30),
+                            EdgeInsets.only(left: 20.0, right: 20, bottom: 30),
                         child: Text(
                           'Seja Bem-Vindo',
                           style: TextStyle(
@@ -58,9 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: TextFormField(
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (email) =>
-                          email != null && !EmailValidator.validate(email)
-                              ? 'Entre com um Email válido'
-                              : null,
+                              email != null && !EmailValidator.validate(email)
+                                  ? 'Entre com um Email válido'
+                                  : null,
                           keyboardType: TextInputType.emailAddress,
                           controller: emailController,
                           decoration: const InputDecoration(
@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Padding(
                         padding:
-                        const EdgeInsets.only(top: 20, left: 10, right: 30),
+                            const EdgeInsets.only(top: 20, left: 10, right: 30),
                         child: TextFormField(
                           controller: passwordController,
                           decoration: const InputDecoration(
@@ -103,7 +103,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const ForgotPasswordScreen(),
+                              builder: (context) =>
+                                  const ForgotPasswordScreen(),
                             ));
                           },
                         ),
@@ -119,9 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             style: ButtonStyle(
                               backgroundColor:
-                              MaterialStateProperty.all(Colors.black87),
+                                  MaterialStateProperty.all(Colors.black87),
                               shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                       side: const BorderSide(
@@ -139,17 +140,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Row(children: const <Widget>[
                           Expanded(
                               child: Divider(
-                                thickness: 2,
-                                indent: 50,
-                                endIndent: 10,
-                              )),
+                            thickness: 2,
+                            indent: 50,
+                            endIndent: 10,
+                          )),
                           Text("ou"),
                           Expanded(
                               child: Divider(
-                                thickness: 2,
-                                indent: 10,
-                                endIndent: 50,
-                              )),
+                            thickness: 2,
+                            indent: 10,
+                            endIndent: 50,
+                          )),
                         ]),
                       ),
                       Padding(
@@ -182,6 +183,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: Colors.blueAccent))
                                 ]),
                           )),
+                      SizedBox(
+                        height: 30,
+                      )
                     ],
                   ),
                 ),
@@ -191,15 +195,14 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
   }
 
-
   // sign in the user using their email and password, shows an error message if sign-in fails, and removes the dialog and any intermediate screens if sign-in succeeds or fails.
   Future signIn() async {
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) => const Center(
-          child: CircularProgressIndicator(),
-        ));
+              child: CircularProgressIndicator(),
+            ));
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
@@ -216,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       final GoogleSignInAuthentication? googleAuth =
-      await googleUser?.authentication;
+          await googleUser?.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
@@ -224,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       final UserCredential userCredential =
-      await FirebaseAuth.instance.signInWithCredential(credential);
+          await FirebaseAuth.instance.signInWithCredential(credential);
 
       if (userCredential.user != null) {
         Navigator.of(context).push(
